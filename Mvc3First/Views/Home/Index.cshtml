@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<h2>@ViewBag.Message</h2>
+<p>
+    To learn more about ASP.NET MVC visit <a href="http://asp.net/mvc" title="ASP.NET MVC Website">
+        http://asp.net/mvc</a>.
+</p>
+<hr />
+<input type="text" id="valueOne" />
++
+<input type="text" id="valueTwo" />
+<input type="button" id="btnTotal" value="=" />
+<input type="text" id="valueT" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnTotal").click(function () {
+            var valueOne = $("#valueOne").val();
+            var valueTwo = $("#valueTwo").val();
+            //        $.get('@Url.Action("JiaFa")' + '?valueOne=' + valueOne + "&valueTwo=" + valueTwo, function (result) {
+            //            $("#valueT").val(result);
+            //        });
+            $.ajax({
+                url: '@Url.Action("JiaFa")'
+            , type: "post"
+            , data: { "valueOne": valueOne, "valueTwo": valueTwo }
+            , success: function (result) {
+                $("#valueT").val(result);
+            }
+            , error: function (msg) {
+                alert(msg);
+            }
+            });
+        });
+
+        $("#btnRedirect").click(function () {
+
+        });
+    });
+</script>
+<hr />
+<input type="button" id="btnRedirect" value="Redirect" />
